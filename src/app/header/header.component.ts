@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  links= ['home','became a provider','sign up','sign in'];
+  links= ['home','became a provider','faq','sign up','sign in'];
   constructor() { }
 
   ngOnInit() {
