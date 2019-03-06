@@ -1,6 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+$dangerColor:#dc3545;
+$dangerColorShadow:#dc354529;
+
+$successColor:#28a745;
+$successColorShadow:#28a74529;
+
 body{
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+}
+
+.has-danger .form-control{
+    border-color: $dangerColor!important;
+}
+
+.has-danger .form-control:focus {
+    border-color: $dangerColor;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem $dangerColorShadow;
+}
+
+.has-danger .form-control-feedback{
+    color:$dangerColor!important;
+}
+
+.has-success .form-control{
+    border-color: $successColor!important;
+}
+
+.has-success .form-control:focus {
+    border-color: $dangerColor;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem $successColorShadow;
 }
