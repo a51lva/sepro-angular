@@ -13,17 +13,20 @@ export class AuthService {
   }
 
   authenticate(username, password){
-    const httpOptions = {
-      headers: this.httpRequestheader()
+    let httpHeaders = {
+      'Content-Type':  'application/json'
     };
+    
 
+    const httpOptions = {
+      headers: new HttpHeaders(httpHeaders)
+    };
+    
     return this.http.post(`${this.apiURL}/users/login`, JSON.stringify({username: username,password: password}), httpOptions);
   }
 
-  userProfileRequest(userid){
-    //this.authorizationHeaderAppend();  
-    //this.requestOptions = {headers: this.requestHeader};
-    return this.http.get(`${this.apiURL}/users/${userid}`,{});
+  userProfileRequest(userid){    
+    return this.http.get(`${this.apiURL}/users/${userid}`,this.httpRequestOptions());
   }
 
   logout(){
@@ -65,7 +68,7 @@ export class AuthService {
     localStorage.setItem('userprofile',userProfile)
   }
 
-  httpRequestheader(): HttpHeaders{
+  httpRequestOptions(){
     let httpHeaders = {
       'Content-Type':  'application/json'
     };
@@ -73,7 +76,11 @@ export class AuthService {
     if(this.isAuthenticaded){
       httpHeaders['Authorization'] = this.getToken();
     }
+
+    const httpOptions = {
+      headers: new HttpHeaders(httpHeaders)
+    };
     
-    return new HttpHeaders(httpHeaders);
+    return httpOptions;
   }
 }

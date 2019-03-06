@@ -47,6 +47,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
      this.isAuthenticated = this.authService.isAuthenticaded();
+     /*
      this.userProfile = this.authService.getUserProfile();
 
      if( this.userProfile === null && this.isAuthenticated){
@@ -57,6 +58,7 @@ export class HeaderComponent implements OnInit {
      }else{
          this.authService.logout();            
      }
+     */
   }
 
 }
