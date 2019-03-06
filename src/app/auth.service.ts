@@ -8,28 +8,22 @@ import {base64} from 'base-64';
 })
 export class AuthService {
   private apiURL:string = environment.apiURL;;
-  private requestHeader = new HttpHeaders(
-    {
-      'Accept':'application/json',
-      'Content-Type':'application/json',
-      'Cache-Control': 'no-cache'
-    }
-    
-  );
-  private requestOptions = {};
-  constructor(protected http: HttpClient) { 
+  
+  constructor(private http: HttpClient) { 
   }
 
   authenticate(username, password){
-    this.authorizationHeaderAppend();     
-    this.requestOptions = {headers: this.requestHeader};
-    return this.http.post(`${this.apiURL}/users/login`, JSON.stringify(username,password), this.requestOptions);
+    const httpOptions = {
+      headers: this.httpRequestheader()
+    };
+
+    return this.http.post(`${this.apiURL}/users/login`, JSON.stringify({username: username,password: password}), httpOptions);
   }
 
   userProfileRequest(userid){
-    this.authorizationHeaderAppend();  
-    this.requestOptions = {headers: this.requestHeader};
-    return this.http.get(`${this.apiURL}/users/${userid}`,this.requestOptions);
+    //this.authorizationHeaderAppend();  
+    //this.requestOptions = {headers: this.requestHeader};
+    return this.http.get(`${this.apiURL}/users/${userid}`,{});
   }
 
   logout(){
@@ -71,9 +65,15 @@ export class AuthService {
     localStorage.setItem('userprofile',userProfile)
   }
 
-  authorizationHeaderAppend(){
+  httpRequestheader(): HttpHeaders{
+    let httpHeaders = {
+      'Content-Type':  'application/json'
+    };
+    
     if(this.isAuthenticaded){
-      this.requestHeader.append('Authorization',this.getToken());
+      httpHeaders['Authorization'] = this.getToken();
     }
+    
+    return new HttpHeaders(httpHeaders);
   }
 }
