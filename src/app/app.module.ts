@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FilterComponent } from './filter/filter.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     FooterComponent,
     FilterComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
