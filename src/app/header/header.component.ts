@@ -37,8 +37,8 @@ export class HeaderComponent implements OnInit {
       authentication:false
     },
     {
-      name:'Profile',
-      path:'profile',
+      name:'Sign out',
+      path:'sign-out',
       authentication:true
     }
   ];
@@ -54,13 +54,24 @@ export class HeaderComponent implements OnInit {
       this.isAuthenticated = this.authService.isAuthenticaded();
       this.userProfile = this.authService.getUserProfile();
 
-      if( this.userProfile === null && this.isAuthenticated){
-        this.authService.userProfileRequest(this.authService.getUserid()).subscribe(result =>{
+      if( this.userProfile == null && this.isAuthenticated){
+        this.authService.userProfileRequest(this.authService.getUserid()).pipe(
+          filter(profile => {return profile != null})
+        )
+        .subscribe(
+          (result) => {
           this.userProfile = result;
           this.authService.setUserProfile(this.userProfile);
-        });
+          },
+          (error) => {
+            console.log(error);
+            this.authService.logout();
+          }
+        );
       }else{
-          this.authService.logout();            
+        if(!this.isAuthenticated){
+          this.authService.logout(); 
+        }           
       }
 
       this.searchField.valueChanges.pipe(

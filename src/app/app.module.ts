@@ -13,6 +13,7 @@ import { FilterComponent } from './filter/filter.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SearchComponent } from './search/search.component';
     FooterComponent,
     FilterComponent,
     LoginComponent,
-    SearchComponent
+    SearchComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
