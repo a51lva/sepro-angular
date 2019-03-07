@@ -32,17 +32,32 @@ export class LoginComponent implements OnInit {
     this.formValidation = this.loginForm.invalid;
 
     if(this.loginForm.valid){
-      this.authService.authenticate(username,password).subscribe((res) => {
-        let token = res['authorization'];
-        if(token){
+      this.authService.authenticate(username,password).subscribe(
+        (res) => { 
+          let token = res['authorization'];
           this.authService.setToken(token)
-          this.router.navigateByUrl('/home');
-        }else{
+          let userId = this.authService.getUserid();
+          this.authService.userProfileRequest(userId).subscribe(
+            (profile) => {
+              this.authService.setUserProfile(profile);
+              this.formValidation = false;
+              this.router.navigateByUrl('/home');
+            },
+            (error) => {
+              this.password.setValue('');
+              this.authService.logout();
+              this.formValidation = true;
+              this.formValidationMessage = "Error getting user Profile, please authenticate again!";
+            },
+            () => {console.log("Request Complete")}
+          );
+        },
+        (error) => {
           this.password.setValue('');
           this.formValidation = true;
-          this.formValidationMessage = res['message'];
+          this.formValidationMessage = error['message'];
         }
-      })
+      )
     }
   }
 

@@ -2,7 +2,7 @@ import { Injectable} from '@angular/core';
 import { Observable } from  "rxjs";
 import { HttpClient, HttpHeaders } from  "@angular/common/http";
 import {environment} from  "../environments/environment";
-import {base64} from 'base-64';
+import base64 from 'base-64';
 @Injectable({
   providedIn: 'root'
 })
@@ -48,14 +48,18 @@ export class AuthService {
   }
 
   getUserid(){
-    let user_id:any;
+    let user_id:any = 0;
     let token = this.getToken();
+
     if (token != null){
-      let res = token.split(".");
-      user_id = JSON.parse(base64.decode(res[1]));
+      let res = token.split('.',token.length);
+      user_id = JSON.parse(
+        base64.decode(res[1])
+      );
       user_id = user_id['sub'];
     }
-    return user_id['sub']
+
+    return user_id;
   }
 
 
