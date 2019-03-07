@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { FormControl, Validators } from '@angular/forms';
+import { map,debounceTime,distinctUntilChanged, filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -42,23 +45,35 @@ export class HeaderComponent implements OnInit {
 
   private isAuthenticated = false;
   private userProfile = null;
+  searchField: FormControl;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-     this.isAuthenticated = this.authService.isAuthenticaded();
-     /*
-     this.userProfile = this.authService.getUserProfile();
+      this.searchField = new FormControl('', Validators.required);
+      this.isAuthenticated = this.authService.isAuthenticaded();
+      this.userProfile = this.authService.getUserProfile();
 
-     if( this.userProfile === null && this.isAuthenticated){
-       this.authService.userProfileRequest(this.authService.getUserid()).subscribe(result =>{
-         this.userProfile = result;
-         this.authService.setUserProfile(this.userProfile);
-       });
-     }else{
-         this.authService.logout();            
-     }
-     */
+      if( this.userProfile === null && this.isAuthenticated){
+        this.authService.userProfileRequest(this.authService.getUserid()).subscribe(result =>{
+          this.userProfile = result;
+          this.authService.setUserProfile(this.userProfile);
+        });
+      }else{
+          this.authService.logout();            
+      }
+
+      this.searchField.valueChanges.pipe(
+        debounceTime(400), 
+        distinctUntilChanged(),
+        filter(term => {return this.searchField.valid}), 
+        map(term =>{
+        return term.replace(/<(?:.|\n)*?</gm,'');
+      }))
+      .subscribe((value) => {
+        this.router.navigateByUrl(`/search/${value}`);
+      });
+        
   }
 
 }
