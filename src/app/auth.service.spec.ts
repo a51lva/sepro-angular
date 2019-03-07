@@ -1,4 +1,4 @@
-import { TestBed, inject, fakeAsync, tick, getTestBed } from '@angular/core/testing';
+import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
 
