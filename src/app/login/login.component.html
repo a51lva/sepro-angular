@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <form class="login-form" [formGroup]="loginForm" novalidate>
+      <form class="login-form" [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
           <div class="form-group" [ngClass]="{
             'has-danger': formValidation
           }" *ngIf="formValidation">
@@ -28,7 +28,7 @@
             <p>Password is required</p>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
       </form>
     </div>
   </div>
