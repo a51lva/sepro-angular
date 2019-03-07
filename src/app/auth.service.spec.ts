@@ -23,20 +23,20 @@ describe('AuthService', () => {
     localStorage.removeItem('token');
   })
 
-  fit('should be created', () => {
+  it('should be created', () => {
     expect(authService).toBeTruthy();
   });
 
-  fit('should retun true from isAuthenticated when there is a token', () =>{
+  it('should retun true from isAuthenticated when there is a token', () =>{
     localStorage.setItem('token','silva');
     expect(authService.isAuthenticaded()).toBeTruthy();
   });
 
-  fit('Should return false from isAuthenticated when there is no token', () => {
+  it('Should return false from isAuthenticated when there is no token', () => {
     expect(authService.isAuthenticaded()).toBeFalsy();
   })
 
-  fit('should perfom authentication correctly',() => {
+  it('should perfom authentication correctly',() => {
     const authorizadummution = [{"authorization": 'c421361e-7d45-493a-a827-93b36017b48b'}];
     authService.authenticate('admin', 'abc123').subscribe(res =>{
       expect(res).toEqual(authorizadummution);

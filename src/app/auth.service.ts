@@ -1,32 +1,26 @@
 import { Injectable} from '@angular/core';
-import { Observable } from  "rxjs";
-import { HttpClient, HttpHeaders } from  "@angular/common/http";
+import { HttpClient } from  "@angular/common/http";
 import {environment} from  "../environments/environment";
 import base64 from 'base-64';
+import { RequestOption } from './request-option';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiURL:string = environment.apiURL;;
-  
+  private requestOptions: RequestOption;
+
   constructor(private http: HttpClient) { 
+    this.requestOptions = new RequestOption();
   }
 
   authenticate(username, password){
-    let httpHeaders = {
-      'Content-Type':  'application/json'
-    };
-    
-
-    const httpOptions = {
-      headers: new HttpHeaders(httpHeaders)
-    };
-    
-    return this.http.post(`${this.apiURL}/users/login`, JSON.stringify({username: username,password: password}), httpOptions);
+    return this.http.post(`${this.apiURL}/users/login`, JSON.stringify({username: username,password: password}), this.requestOptions.httpRequestOptions(false,''));
   }
 
-  userProfileRequest(userid){    
-    return this.http.get(`${this.apiURL}/users/${userid}`,this.httpRequestOptions());
+  userProfileRequest(userid){
+    let token = this.getToken();
+    return this.http.get(`${this.apiURL}/users/${userid}`, this.requestOptions.httpRequestOptions(true,token));
   }
 
   logout(){
@@ -52,7 +46,7 @@ export class AuthService {
     let token = this.getToken();
 
     if (token != null){
-      let res = token.split('.',token.length);
+      let res = token.split('.');
       user_id = JSON.parse(
         base64.decode(res[1])
       );
@@ -65,26 +59,10 @@ export class AuthService {
 
   getUserProfile(){
     const userProfile = localStorage.getItem('userprofile');
-    return userProfile? JSON.parse(localStorage.profile): null;
+    return userProfile? JSON.parse(userProfile): null;
   }
 
   setUserProfile(userProfile){
-    localStorage.setItem('userprofile',userProfile)
-  }
-
-  httpRequestOptions(){
-    let httpHeaders = {
-      'Content-Type':  'application/json'
-    };
-    
-    if(this.isAuthenticaded){
-      httpHeaders['Authorization'] = this.getToken();
-    }
-
-    const httpOptions = {
-      headers: new HttpHeaders(httpHeaders)
-    };
-    
-    return httpOptions;
+    localStorage.setItem('userprofile',JSON.stringify(userProfile))
   }
 }
