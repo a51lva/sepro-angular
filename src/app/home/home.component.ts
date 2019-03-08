@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Offer } from '../offer';
 import { OfferService } from '../offer.service';
 import { Observable } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -18,9 +18,7 @@ export class HomeComponent implements OnInit {
   constructor(private offerService: OfferService) { }
 
   ngOnInit() {
-    this.offers = this.offerService.loadByProviderID(0).pipe(
-        take(4)
-      );
+    this.offers = this.offerService.loadByProviderID(0);
   }
 
 }
