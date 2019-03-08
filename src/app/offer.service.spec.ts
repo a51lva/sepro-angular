@@ -27,7 +27,7 @@ describe('OffersService', () => {
     expect(offerService).toBeTruthy();
   });
 
-  fit('Should load the offer with Id: 1', () => {
+  it('Should load the offer with Id: 1', () => {
     offerService.load(1).subscribe(result => {
       expect(result.length).toBe(1);
     })
@@ -36,7 +36,7 @@ describe('OffersService', () => {
     expect(req.request.method).toBe('GET');
   })
 
-  fit('should load all offers', () => {
+  it('should load all offers', () => {
     const length = 0;
     offerService.loadByProviderID(0).subscribe((result)=>{
       expect(result.length).toBeGreaterThan(length);
@@ -46,7 +46,7 @@ describe('OffersService', () => {
     expect(req.request.method).toBe('GET');
   })
 
-  fit('Should load all offers from providerId: 5', () => {
+  it('Should load all offers from providerId: 5', () => {
     offerService.loadByProviderID(5).subscribe(result => {
       expect(result.length).toBeGreaterThan(0);
     })
@@ -55,7 +55,7 @@ describe('OffersService', () => {
     expect(req.request.method).toBe('GET');
   })
   
-  fit('should not load an offer', () => {
+  it('should not load an offer', () => {
     const length = 0;
     offerService.loadByProviderID(null).subscribe((result)=>{
       expect(result.length).toBe(length);

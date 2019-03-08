@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap, filter } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,19 +17,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    if(this.router.url == 'sign-out'){
-      this.authService.logout();
+  ngOnInit() {    
+    if(this.authService.isAuthenticaded()){
       this.router.navigateByUrl('/home');
     }
-    else{
-      if(this.authService.isAuthenticaded()){
-        this.router.navigateByUrl('/home');
-      }
 
-      this.createFormControls();
-      this.createForm();
-    } 
+    this.createFormControls();
+    this.createForm();
   }
 
   onSubmit(){

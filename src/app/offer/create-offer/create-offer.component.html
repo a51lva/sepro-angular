@@ -1,3 +1,59 @@
-<p>
-  create-offer works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-xs-12">
+      
+    </div>
+    <div class="col-md-9 col-xs-12">
+        <form [formGroup]="createOfferForm" novalidate (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="form-group col-12" [ngClass]="{'has-danger': title.invalid && (title.dirty || title.touched)}">
+              <label>Title *</label>
+              <input type="text" class="form-control"  placeholder="title" formControlName="title">
+              <div class="form-control-feedback" *ngIf="title.invalid && (title.dirty || title.touched)"><p>This field is required!</p></div>
+            </div>
+            <div class="form-group col-md-6 col-xs-12" [ngClass]="{'has-danger': description.invalid && (description.dirty || description.touched)}">
+              <label>Description *</label>
+              <textarea  class="form-control"  placeholder="Description" formControlName="description"></textarea>
+              <div class="form-control-feedback" *ngIf="description.invalid && (description.dirty || description.touched)"><p>This field is required!</p></div>
+            </div>
+            <div class="form-group col-md-4 col-xs-12" [ngClass]="{'has-danger': reward.invalid && (reward.dirty || reward.touched)}">
+              <label>Reward *</label>
+              <input type="number" class="form-control"  placeholder="Reward" formControlName="reward">
+              <div class="form-control-feedback" *ngIf="reward.invalid && (reward.dirty || reward.touched)"><p>This field is required!</p></div>
+            </div>
+            <div class="form-group col-md-4 col-xs-12" [ngClass]="{'has-danger': category.invalid && (category.dirty || category.touched)}">
+              <label>Category *</label>
+              <select class="form-control" formControlName="category">
+                <option value=""></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <div class="form-control-feedback" *ngIf="category.invalid && (category.dirty || category.touched)"><p>This field is required!</p></div>
+            </div>
+            <div class="form-group col-md-4 col-xs-12" [ngClass]="{'has-danger': priority.invalid && (priority.dirty || priority.touched)}">
+              <label>Priority *</label>
+              <select class="form-control" formControlName="priority">
+                <option value=""></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              <div class="form-control-feedback" *ngIf="priority.invalid && (priority.dirty || priority.touched)"><p>This field is required!</p></div>
+            </div>
+            <div class="form-group col-md-6 col-xs-12" [ngClass]="{'has-danger': startDate.invalid && (startDate.dirty || startDate.touched)}">
+              <label>Start Date *</label>
+              <input type="date" class="form-control" formControlName="startDate">
+              <div class="form-control-feedback" *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"><p>This field is required!</p></div>
+            </div>
+            <div class="form-group col-md-6 col-xs-12" [ngClass]="{'has-danger': endDate.invalid && (endDate.dirty || endDate.touched)}">
+                <label>End Date *</label>
+                <input type="date" class="form-control" formControlName="endDate">
+                <div class="form-control-feedback" *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)"><p>This field is required!</p></div>
+              </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
