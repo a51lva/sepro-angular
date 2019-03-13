@@ -42,6 +42,7 @@ export class HeaderComponent implements OnInit {
       authentication:true
     }
   ];
+  logoImage = "../../assets/logo.png";
 
   private isAuthenticated = false;
   private userProfile = null;
