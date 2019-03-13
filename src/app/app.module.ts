@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreateOfferComponent } from './offer/create-offer/create-offer.component';
+import { Page404Component } from './page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CreateOfferComponent } from './offer/create-offer/create-offer.componen
     LoginComponent,
     SearchComponent,
     LogoutComponent,
-    CreateOfferComponent
+    CreateOfferComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SearchComponent } from './search/search.component';
 import { CreateOfferComponent } from './offer/create-offer/create-offer.component';
+import { Page404Component } from './page404/page404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'sign-out', component:LogoutComponent},
   { path: 'search', component: SearchComponent},
   { path: 'search/:searchQuery', component: SearchComponent},  
-  { path: 'create-offer', component: CreateOfferComponent}
+  { path: 'create-offer', component: CreateOfferComponent},  
+  { path: '404', component: Page404Component}
 ];
 
 @NgModule({
