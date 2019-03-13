@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from 'src/app/offer.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-offer',
@@ -20,11 +22,25 @@ export class CreateOfferComponent implements OnInit {
   formValidation:boolean = false;
   formValidationMessage:string = "Please validate your form and try again!";
 
-  constructor(private offerService: OfferService) { }
+  constructor(private authService: AuthService, private offerService: OfferService, private router: Router) { }
 
   ngOnInit() {
+    this.pageValidation();
     this.createFormControls();
     this.createForm();
+  }
+
+  pageValidation(){
+    const userProfile = this.authService.getUserProfile();
+
+    if(!this.authService.isAuthenticaded()){      
+      this.router.navigateByUrl('/sign-in?r=create-offer');
+    }
+
+    if(userProfile.user_role_id != 3){
+      this.router.navigateByUrl('/404');
+    }
+    
   }
 
   onSubmit(){

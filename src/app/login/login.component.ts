@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +14,11 @@ export class LoginComponent implements OnInit {
   formValidation:boolean = false;
   formValidationMessage:string = "Please validate your form and try again!";
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {    
-    if(this.authService.isAuthenticaded()){
-      this.router.navigateByUrl('/home');
+    if(this.authService.isAuthenticaded()){      
+      window.location.replace('/home');
     }
 
     this.createFormControls();
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit {
             (profile) => {
               this.authService.setUserProfile(profile);
               this.formValidation = false;
-              this.router.navigateByUrl('/home');
+              window.location.replace('/home');
             },
             (error) => {
               this.password.setValue('');
