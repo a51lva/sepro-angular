@@ -13,12 +13,12 @@ export class HomeComponent implements OnInit {
   featuredCards = [1,2,3,4];
   services = [1,2,3,4];
   image = "../../assets/picture.jpg";
-  offers: Observable<Offer[]>;
+  allOffers: Observable<Offer[]>;
 
   constructor(private offerService: OfferService) { }
 
   ngOnInit() {
-    this.offers = this.offerService.loadByProviderID(0);
+    this.allOffers = this.offerService.loadByProviderID(0);
   }
 
 }

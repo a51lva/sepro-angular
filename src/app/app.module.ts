@@ -16,6 +16,7 @@ import { SearchComponent } from './search/search.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreateOfferComponent } from './offer/create-offer/create-offer.component';
 import { Page404Component } from './page404/page404.component';
+import { ReversePipe } from './reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { Page404Component } from './page404/page404.component';
     SearchComponent,
     LogoutComponent,
     CreateOfferComponent,
-    Page404Component
+    Page404Component,
+    ReversePipe
   ],
   imports: [
     BrowserModule,

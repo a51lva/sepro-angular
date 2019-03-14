@@ -4,13 +4,13 @@
       <div class="col-md-3 col-xs-12">
         <h3>Se-Pro</h3>
         <ul>
-          <li *ngFor="let link of links"><a [href]="link.path" *ngIf="link.type=='sepro'">{{link.name}}</a></li>
+          <li *ngFor="let link of links"><a routerLink="{{link.path}}" *ngIf="link.type=='sepro'">{{link.name}}</a></li>
         </ul>
       </div>
       <div class="col-md-3 col-xs-12">
         <h3>Account</h3>
         <ul>
-          <li *ngFor="let link of links"><a [href]="link.path" *ngIf="link.type=='account'">{{link.name}}</a></li>
+          <li *ngFor="let link of links"><a routerLink="{{link.path}}" *ngIf="link.type=='account'">{{link.name}}</a></li>
         </ul>
       </div>
       <div class="col-md-6 col-xs-12">
