@@ -17,6 +17,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { CreateOfferComponent } from './offer/create-offer/create-offer.component';
 import { Page404Component } from './page404/page404.component';
 import { ReversePipe } from './reverse.pipe';
+import { OfferDetailComponent } from './offer/offer-detail/offer-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ReversePipe } from './reverse.pipe';
     LogoutComponent,
     CreateOfferComponent,
     Page404Component,
-    ReversePipe
+    ReversePipe,
+    OfferDetailComponent
   ],
   imports: [
     BrowserModule,
