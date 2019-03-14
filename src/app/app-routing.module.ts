@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent},
   { path: 'search/:searchQuery', component: SearchComponent},  
   { path: 'create-offer', component: CreateOfferComponent},  
-  { path: '404', component: Page404Component}
+  { path: '404', component: Page404Component},
+  { path: '**', component: Page404Component }
 ];
 
 @NgModule({

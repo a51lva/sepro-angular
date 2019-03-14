@@ -20,19 +20,19 @@ describe('AuthService', () => {
   
   afterEach(()=>{
     httpMock.verify();
-    localStorage.removeItem('token');
   })
 
   it('should be created', () => {
     expect(authService).toBeTruthy();
   });
 
-  it('should retun true from isAuthenticated when there is a token', () =>{
-    localStorage.setItem('token','silva');
+  fit('should retun true from isAuthenticated when there is a token', () =>{
+    spyOn(authService,'isAuthenticaded').and.returnValue(true);
     expect(authService.isAuthenticaded()).toBeTruthy();
   });
 
-  it('Should return false from isAuthenticated when there is no token', () => {
+  fit('Should return false from isAuthenticated when there is no token', () => {
+    spyOn(authService,'isAuthenticaded').and.returnValue(false);
     expect(authService.isAuthenticaded()).toBeFalsy();
   })
 

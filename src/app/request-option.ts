@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 import { HttpHeaders } from '@angular/common/http';
 
 export class RequestOption {
