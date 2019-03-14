@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Offer } from '../offer';
 import { OfferService } from '../offer.service';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +15,14 @@ export class HomeComponent implements OnInit {
   image = "../../assets/picture.jpg";
   allOffers: Observable<Offer[]>;
 
-  constructor(private offerService: OfferService) { }
+  constructor(private offerService: OfferService, private router: Router) { }
 
   ngOnInit() {
     this.allOffers = this.offerService.loadByProviderID(0);
+  }
+
+  offerClick(id:any){
+    this.router.navigateByUrl(`offer/${id}`);
   }
 
 }
