@@ -137,7 +137,7 @@ export class AuthService {
     this._idToken = '';
     this._expiresAt = 0;
     localStorage.removeItem('isLoggedIn');
-    window.location.replace('/home');
+    this.router.navigateByUrl('/');
   }
 
   public isAuthenticated(): boolean {

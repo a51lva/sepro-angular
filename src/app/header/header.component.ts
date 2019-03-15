@@ -109,7 +109,8 @@ export class HeaderComponent implements OnInit {
   }
 
   public auth0Logout():void{
-    this.authService.logoutAuth0();    
+    this.authService.logoutAuth0(); 
+    window.location.replace('https://dev-pd0bnyfm.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A4200&client_id=WcFixLzzuCfHl6PclUFieK3fFeahpjEH');   
   }
 
 }
