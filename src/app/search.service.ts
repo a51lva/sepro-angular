@@ -19,6 +19,10 @@ export class SearchService {
   }
   
   offers(queryText:string):Observable<Offer[]>{
-    return this.http.get<Offer[]>(`${this.apiURL}/search?type=offer&title=${queryText}`, this.requestOptions.httpRequestOptions(false,'')).pipe(shareReplay());
+    return this.http.get<Offer[]>(
+      `${this.apiURL}/search?type=offer&title=${queryText}`, 
+      this.requestOptions.httpRequestOptions(false,'')
+      ).pipe(shareReplay()
+    );
   }
 }

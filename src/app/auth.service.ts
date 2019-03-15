@@ -34,12 +34,19 @@ export class AuthService {
   }
 
   authenticate(username, password){
-    return this.http.post(`${this.apiURL}/users/login`, JSON.stringify({username: username,password: password}), this.requestOptions.httpRequestOptions(false,'')).pipe(shareReplay());
+    return this.http.post(
+      `${this.apiURL}/users/login`, 
+      JSON.stringify({username: username,password: password}), 
+      this.requestOptions.httpRequestOptions(false,'')
+    ).pipe(shareReplay());
   }
 
   userProfileRequest(userid){
     let token = this.getToken();
-    return this.http.get(`${this.apiURL}/users/${userid}`, this.requestOptions.httpRequestOptions(true,token)).pipe(shareReplay());
+    return this.http.get(
+      `${this.apiURL}/users/${userid}`, 
+      this.requestOptions.httpRequestOptions(true,token)
+    ).pipe(shareReplay());
   }
 
   logout(){

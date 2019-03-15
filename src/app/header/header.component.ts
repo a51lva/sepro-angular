@@ -27,11 +27,6 @@ export class HeaderComponent implements OnInit {
       authentication:null
     },
     {
-      name:'Sign Up',
-      path:'sign-up',
-      authentication:false
-    },
-    {
       name:'Sign In',
       path:'sign-in',
       authentication:false

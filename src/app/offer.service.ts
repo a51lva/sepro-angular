@@ -22,15 +22,24 @@ export class OfferService {
     const token = this.authService.getToken();
     item.provider = this.authService.getUserid();
 
-    return this.http.post<Offer>(`${this.apiURL}/offer`, JSON.stringify(item), this.requestOptions.httpRequestOptions(true, token)).pipe(shareReplay());
+    return this.http.post<Offer>(
+      `${this.apiURL}/offer`, JSON.stringify(item), 
+      this.requestOptions.httpRequestOptions(true, token)
+    ).pipe(shareReplay());
   }
 
   load(offerId:number):Observable<Offer>{
-    return this.http.get<Offer>(`${this.apiURL}/offer/${offerId}`, this.requestOptions.httpRequestOptions(false,'')).pipe(shareReplay());
+    return this.http.get<Offer>(
+      `${this.apiURL}/offer/${offerId}`, 
+      this.requestOptions.httpRequestOptions(false,'')
+    ).pipe(shareReplay());
   }
   
   loadByProviderID(providerId:number):Observable<Offer[]>{
-    return this.http.get<Offer[]>(`${this.apiURL}/offers/${providerId}`, this.requestOptions.httpRequestOptions(false,'')).pipe(shareReplay());
+    return this.http.get<Offer[]>(
+      `${this.apiURL}/offers/${providerId}`, 
+      this.requestOptions.httpRequestOptions(false,'')
+    ).pipe(shareReplay());
   }  
 
 }
