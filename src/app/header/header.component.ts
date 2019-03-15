@@ -44,16 +44,19 @@ export class HeaderComponent implements OnInit {
   ];
   logoImage = "../../assets/logo.png";
 
-  private isAuthenticated = false;
-  private userProfile = null;
+  private isAuthenticated: boolean = false;
+  private userProfile:any = null;
   searchField: FormControl;
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit() {
+  constructor(private authService: AuthService, private router: Router) {
     
+   }
+
+  ngOnInit() { 
+    this.authService.handleAuthentication();   
     this.userProfileAuthentication();
-    this.searchPerform();        
+    this.searchPerform();
+    this.auth0AuthenticationHandle();        
   }
 
   userProfileAuthentication(){
@@ -93,6 +96,20 @@ export class HeaderComponent implements OnInit {
     .subscribe((value) => {
       this.router.navigateByUrl(`/search/${value}`);
     });
+  }
+  
+  login(){
+    this.authService.login();
+  }
+
+  public auth0AuthenticationHandle():void{
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      this.authService.renewTokens();
+    }
+  }
+
+  public auth0Logout():void{
+    this.authService.logoutAuth0();    
   }
 
 }

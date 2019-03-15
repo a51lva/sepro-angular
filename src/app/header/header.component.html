@@ -13,6 +13,12 @@
                 <a class="nav-link" routerLink="{{link.path}}" *ngIf="link.authentication == null || (!isAuthenticated && !link.authentication)">{{link.name}}</a>
                 <a class="nav-link" routerLink="{{link.path}}" *ngIf="isAuthenticated && link.authentication">{{link.name}}</a>
             </li>
+            <li class="nav-item" *ngIf="!authService.isAuthenticated()">
+                <a class="nav-link" routerLink="/" (click)="login()" >Auth0 Login</a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isAuthenticated()">
+                <a class="nav-link" routerLink="/" (click)="auth0Logout()" >Auth0 Logout</a>
+            </li>
         </ul>
         
     </div>
