@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Offer } from '../offer';
 import { OfferService } from '../offer.service';
 import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',

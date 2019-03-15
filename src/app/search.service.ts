@@ -5,6 +5,7 @@ import { RequestOption } from './request-option';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { Offer } from './offer';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,6 @@ export class SearchService {
   }
   
   offers(queryText:string):Observable<Offer[]>{
-    return this.http.get<Offer[]>(`${this.apiURL}/search?type=offer&title=${queryText}`, this.requestOptions.httpRequestOptions(false,''));
+    return this.http.get<Offer[]>(`${this.apiURL}/search?type=offer&title=${queryText}`, this.requestOptions.httpRequestOptions(false,'')).pipe(shareReplay());
   }
 }
