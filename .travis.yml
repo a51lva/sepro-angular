@@ -1,3 +1,5 @@
+firefox: latest
+
 language: node_js
 node_js:
   - "10.15.1"
