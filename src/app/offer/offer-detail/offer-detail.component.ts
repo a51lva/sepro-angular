@@ -23,16 +23,11 @@ export class OfferDetailComponent implements OnInit {
     )
     .subscribe(value => {
       const offer$ = this.offerService.load(Number(value));
-      offer$.pipe(
-        filter((value) => {
-          return value != null
-      }))
-      .subscribe(
+      offer$.subscribe(
         (value) => {
-          this.offer = value[0];
-        },
-        (error)=>{
-          this.router.navigateByUrl('/404');
+          if(value.length != 0){
+            this.offer = value[0];
+          }
         }
       )
     });

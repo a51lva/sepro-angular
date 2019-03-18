@@ -1,5 +1,6 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
@@ -9,7 +10,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[HttpClientTestingModule],
+      imports:[HttpClientTestingModule, RouterTestingModule],
       providers:[AuthService]
     });
 
@@ -26,12 +27,12 @@ describe('AuthService', () => {
     expect(authService).toBeTruthy();
   });
 
-  fit('should retun true from isAuthenticated when there is a token', () =>{
+  it('should retun true from isAuthenticated when there is a token', () =>{
     spyOn(authService,'isAuthenticaded').and.returnValue(true);
     expect(authService.isAuthenticaded()).toBeTruthy();
   });
 
-  fit('Should return false from isAuthenticated when there is no token', () => {
+  it('Should return false from isAuthenticated when there is no token', () => {
     spyOn(authService,'isAuthenticaded').and.returnValue(false);
     expect(authService.isAuthenticaded()).toBeFalsy();
   })

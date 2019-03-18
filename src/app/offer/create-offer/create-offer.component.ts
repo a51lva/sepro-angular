@@ -37,7 +37,11 @@ export class CreateOfferComponent implements OnInit {
       this.router.navigateByUrl('/sign-in?r=create-offer');
     }
 
-    if(userProfile.user_role_id != 3){
+    if(userProfile){
+      if(userProfile.user_role_id != 3){
+        this.router.navigateByUrl('/404');
+      }
+    }else{
       this.router.navigateByUrl('/404');
     }
     

@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { FilterComponent } from './filter/filter.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreateOfferComponent } from './offer/create-offer/create-offer.component';
@@ -19,6 +19,7 @@ import { Page404Component } from './page404/page404.component';
 import { ReversePipe } from './reverse.pipe';
 import { OfferDetailComponent } from './offer/offer-detail/offer-detail.component';
 import { FilterPipe } from './filter.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,11 @@ import { FilterPipe } from './filter.pipe';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
+    RouterModule
   ],
+  exports:[FilterComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

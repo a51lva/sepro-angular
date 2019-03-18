@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
-
 import { SearchService } from './search.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SearchService', () => {
   let injector;
@@ -10,7 +10,7 @@ describe('SearchService', () => {
   
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[HttpClientTestingModule],
+      imports:[HttpClientTestingModule, RouterTestingModule],
       providers:[SearchService]
     });
 

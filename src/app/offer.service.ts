@@ -28,8 +28,8 @@ export class OfferService {
     ).pipe(shareReplay());
   }
 
-  load(offerId:number):Observable<Offer>{
-    return this.http.get<Offer>(
+  load(offerId:number):Observable<Offer[]>{
+    return this.http.get<Offer[]>(
       `${this.apiURL}/offer/${offerId}`, 
       this.requestOptions.httpRequestOptions(false,'')
     ).pipe(shareReplay());
