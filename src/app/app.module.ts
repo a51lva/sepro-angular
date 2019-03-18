@@ -18,6 +18,7 @@ import { CreateOfferComponent } from './offer/create-offer/create-offer.componen
 import { Page404Component } from './page404/page404.component';
 import { ReversePipe } from './reverse.pipe';
 import { OfferDetailComponent } from './offer/offer-detail/offer-detail.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { OfferDetailComponent } from './offer/offer-detail/offer-detail.componen
     CreateOfferComponent,
     Page404Component,
     ReversePipe,
-    OfferDetailComponent
+    OfferDetailComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

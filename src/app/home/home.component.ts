@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Offer } from '../offer';
 import { OfferService } from '../offer.service';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +14,8 @@ export class HomeComponent implements OnInit {
   services = [1,2,3,4];
   image = "../../assets/picture.jpg";
   allOffers: Observable<Offer[]>;
-
+  filterargs = {location: 'Lisbon'};
+  
   constructor(private offerService: OfferService, private router: Router) { }
 
   ngOnInit() {
