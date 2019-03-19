@@ -1,4 +1,9 @@
 # SeproAngular
+#### Builds
+
+| Branch        | Status        |
+| ------------- |:-------------:|
+| Master        | [![Build Status](https://travis-ci.com/a51lva/sepro-angular.svg?branch=master)](https://travis-ci.com/a51lva/sepro-angular)   |
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
 
