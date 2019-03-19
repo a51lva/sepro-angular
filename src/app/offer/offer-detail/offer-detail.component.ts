@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from 'src/app/offer.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap, filter } from 'rxjs/operators';
-import { of} from 'rxjs';
 import { Offer } from 'src/app/offer';
 
 @Component({
@@ -13,24 +11,19 @@ import { Offer } from 'src/app/offer';
 export class OfferDetailComponent implements OnInit {
   offer: Offer;
 
-  constructor(private offerService: OfferService, private router: Router, private route: ActivatedRoute) { }
+  constructor() {
+    this.offer = new Offer();
+    this.offer.title = 'Some title';
+    this.offer.description = 'description';
+    this.offer.provider = 3;
+    this.offer.serviceCategory = 1;
+    this.offer.startDate = '2019-03-18 00:00:00.000000';
+    this.offer.endDate = '2019-03-18 00:00:00.000000';
+    this.offer.location = 'Lisbon';
+    this.offer.reward = 123;
+    this.offer.priority = 1;
+   }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        {return of(params.get('id'))}
-      )
-    )
-    .subscribe(value => {
-      const offer$ = this.offerService.load(Number(value));
-      offer$.subscribe(
-        (value) => {
-          if(value.length != 0){
-            this.offer = value[0];
-          }
-        }
-      )
-    });
   }
-
 }

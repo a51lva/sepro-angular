@@ -38,7 +38,7 @@ describe('SearchService', () => {
     req.flush(searchResult);
   })
 
-  it('Shouldn\'t get an Search Result', ()  => {
+  it('Shouldn\'t get an Search Result for empty search query', ()  => {
     const searchResult = []
     searchService.offers('').subscribe(result => {
       expect(result.length).toBe(0);
@@ -49,7 +49,7 @@ describe('SearchService', () => {
     req.flush(searchResult);
   })
 
-  it('Shouldn\'t get an Search Result', ()  => {
+  it('Shouldn\'t get an Search Result for search query Silva', ()  => {
     const searchResult = []
     searchService.offers('silva').subscribe(result => {
       expect(result.length).toBe(0);

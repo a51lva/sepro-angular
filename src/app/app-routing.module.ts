@@ -9,7 +9,7 @@ import { CreateOfferComponent } from './offer/create-offer/create-offer.componen
 import { Page404Component } from './page404/page404.component';
 import { OfferDetailComponent } from './offer/offer-detail/offer-detail.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'sign-in', component:LoginComponent},

@@ -1,9 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { OfferDetailComponent } from './offer-detail.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { OfferService } from 'src/app/offer.service';
 
 describe('OfferDetailComponent', () => {
   let component: OfferDetailComponent;
@@ -11,18 +7,18 @@ describe('OfferDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({      
-      imports:[HttpClientTestingModule,RouterTestingModule],
-      declarations: [ OfferDetailComponent ],
-      providers:[OfferService]
-    })
-    .compileComponents();
+      declarations: [ OfferDetailComponent],
+    }).compileComponents();    
+    
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OfferDetailComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
