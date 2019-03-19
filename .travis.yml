@@ -16,10 +16,3 @@ install:
 - npm install
 script:
 - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-deploy:
-  provider: heroku
-  api_key:
-    secure: rBFNpXAg9Lo20GSXzW8ovlgNzOHpUy+ZhGUvuk6W8bWsyXHyb+f5UlBCcIhyk++M7jAv78zfx82usy5RYu0eL4/eZYGk8ZHucVorLCVcs/LRzq5+2N4vFix4e0hAd5yPSx8A7GTayaZ95rczra/metzt9SXEO7SZ0P1RlHj0tEZxjz2zA0yf05kVhxcyKwZ8RrA6jOV9tbK1DudyaKJHmEaqpSFBa8oqx3A5+1kumJui+Zm2Dc5A4Nyh/Hdv/Hh+tH6HH5YPy7UmQ1xdrHxT+80hKT9zEz1bWojjFznj2+uCgKx93EyQVjBaWO7/AWNQPKPMdxT2Ay45PPQxNbmJ083qsWnH1tXZABe8Jf2gzsX9bsRiZ4jv/JaKihGENWibW6xYqMZREMrOI53tf5jeMUWFkDP82LeNRjKwecbgfRNpLMUj30u6hrnS3m934On0qKFfISB1BdukbNh+TTSGlfysA1u72iLtIUrCsdjl1cmJICEaFOKpGzAQhK7JunPTwBQ7LtrALlt+zegCgr0HAVnA7+R3dgopWbaP9yJXQ8E5Gy4Wm9ZkUsKRs+PfMrj+D/qgrawZZuwfDTojiJ39F20RnJF12irZP0Rnt77o/FqI9Me8QUG3GETnn3dOMuTGdlYguzQZLOAlMPuOZF1y9SPBxRKOZHFf3A9AguZ4WAw=
-  app: sepro-angular
-  on:
-    repo: a51lva/sepro-angular
