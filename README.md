@@ -1,5 +1,5 @@
 # Sepro Angular
-#### Builds
+## Builds
 
 | Branch        | Status        |
 | ------------- |:-------------:|
