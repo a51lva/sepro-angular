@@ -1,4 +1,4 @@
-# SeproAngular
+# Sepro Angular
 #### Builds
 
 | Branch        | Status        |
