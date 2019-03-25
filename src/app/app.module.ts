@@ -20,6 +20,8 @@ import { ReversePipe } from './reverse.pipe';
 import { OfferDetailComponent } from './offer/offer-detail/offer-detail.component';
 import { FilterPipe } from './filter.pipe';
 import { RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports:[FilterComponent],
   providers: [],

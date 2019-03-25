@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, timer, from, of } from 'rxjs';
 import { Offer } from './offer';
 import { RequestOption } from './request-option';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, switchMap, takeUntil, filter, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,20 @@ import { shareReplay } from 'rxjs/operators';
 export class OfferService {
   private apiURL:string = environment.apiURL;  
   private requestOptions: RequestOption;
+
+  private cache$: Observable<Array<Offer>>;
+  private reload$ = new Subject<void>();
+  private notification: boolean;
   
   constructor(private http: HttpClient, private authService: AuthService) {
-      this.requestOptions = new RequestOption();
-   }
+    this.requestOptions = new RequestOption();
+    const cachedOffers = localStorage.getItem('offers');
+
+    if(cachedOffers != null){
+      this.cache$ = of(JSON.parse(cachedOffers));
+    }
+
+  }
   
   create(item:Offer): Observable<Offer>{
     const token = this.authService.getToken();
@@ -39,7 +49,53 @@ export class OfferService {
     return this.http.get<Offer[]>(
       `${this.apiURL}/offers/${providerId}`, 
       this.requestOptions.httpRequestOptions(false,'')
-    ).pipe(shareReplay());
-  }  
+    );
+  }
+  
+  get loadAllOffers(){
+    if(!this.cache$){
+      const localOffers = JSON.parse(localStorage.getItem('offers'));
+      const timer$ = timer(0, environment.REFRESH_INTERVAL);      
+        this.cache$ = timer$.pipe(
+          switchMap(() => this.loadByProviderID(0)
+            .pipe(
+              tap(result => {
+                if(localOffers){
+                  if(result.length >localOffers.length){
+                    this.setNotification = true;
+                    localStorage.setItem('offers', JSON.stringify(result))
+                    return result
+                  }else{
+                    this.setNotification = false;
+                    return localOffers
+                  }
+                }else{
+                  this.setNotification = false;
+                  localStorage.setItem('offers', JSON.stringify(result))
+                  return result
+                }
+              })
+            )
+          ),
+          takeUntil(this.reload$),
+          shareReplay(environment.CACHE_SIZE)
+        )
+    }
+
+    return this.cache$
+  }
+
+  forceReload(){
+    this.cache$ = null;
+    this.reload$.next();    
+  }
+
+  get showNotification(){
+    return this.notification;
+  }
+
+  set setNotification(value:boolean){
+    this.notification = value
+  }
 
 }

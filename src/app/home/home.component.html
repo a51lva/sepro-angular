@@ -4,6 +4,14 @@
       <app-filter></app-filter>
     </div>
     <div class="col-md-9 col-xs-12">
+      <div class="notification" [class.visible]="showNotification$ | async">
+        <span>There's new data available. Click to reload the data.</span>
+        <button color="accent" (click)="forceReload()">
+          <div class="flex-row">
+            UPDATE
+          </div>
+        </button>
+      </div>
       <div class="row feature-services">
         <div class="col-12">
           <h3 class="title-feature">Featured Services </h3>
@@ -25,7 +33,7 @@
         <div class="col-md-6 col-xs-12">
           <h3 class="title-whatsnew">What's New</h3>
           <div class="row">            
-              <div class="col-sm-12 offer-card" *ngFor="let offer of allOffers | async | reverse | slice:0:4;" (click)="offerClick(offer.id)">
+              <div class="col-sm-12 offer-card" *ngFor="let offer of offers$ | async | reverse | slice:0:4;" (click)="offerClick(offer.id)">
                   <div class="card mb-3">
                     <div class="row no-gutters">
                       <div class="col-md-4">
@@ -70,7 +78,7 @@
         <div class="col-12">
           <h3 class="title-feature">Services In Lisbon</h3>
           <div class="row">
-            <div class="col-sm-3 offer-card" *ngFor="let featureCard of allOffers | async | filter:filterargs | slice:0:4;">
+            <div class="col-sm-3 offer-card" *ngFor="let featureCard of offers$ | async | filter:filterargs | slice:0:4;">
               <div class="card">
                   <img [src]="image" class="card-img-top" alt="...">
                   <div class="card-body">
