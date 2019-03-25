@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, timer, from, of } from 'rxjs';
+import { Observable, Subject, timer, of } from 'rxjs';
 import { Offer } from './offer';
 import { RequestOption } from './request-option';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
-import { shareReplay, switchMap, takeUntil, filter, tap } from 'rxjs/operators';
+import { shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

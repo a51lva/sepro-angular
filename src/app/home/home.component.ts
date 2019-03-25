@@ -53,8 +53,8 @@ export class HomeComponent implements OnInit {
     const timer$ = timer(0, environment.REFRESH_INTERVAL);
     this.showNotification$ = timer$.pipe(
       switchMap(() => of(
-        this.offerService.showNotification
-      )
+          this.offerService.showNotification
+        )
       )
     )
     this.forceReload$.next();
