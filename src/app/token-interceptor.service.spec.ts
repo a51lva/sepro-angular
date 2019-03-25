@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 describe('TokenInterceptorService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports:[HttpClientTestingModule, RouterTestingModule],
-    providers:[AuthService]
+    providers:[TokenInterceptorService, AuthService]
   }));
 
   it('should be created', () => {
