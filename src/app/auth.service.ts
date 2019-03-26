@@ -41,7 +41,6 @@ export class AuthService {
   }
 
   userProfileRequest(userid){
-    let token = this.getToken();
     return this.http.get(
       `${this.apiURL}/users/${userid}`
     ).pipe(shareReplay());
@@ -59,7 +58,8 @@ export class AuthService {
     }
     
     const isTokenExpired = this.helper.isTokenExpired(token)
-    return isTokenExpired;
+    
+    return !isTokenExpired;
   }
 
   getToken(){
