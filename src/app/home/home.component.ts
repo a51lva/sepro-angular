@@ -64,4 +64,8 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`offer/${id}`);
   }
 
+  trackByFn(index, item) {    
+    return item.id * Math.random();
+  }
+
 }
