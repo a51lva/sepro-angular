@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { SearchService } from './search.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { environment } from 'src/environments/environment';
 
 describe('SearchService', () => {
   let injector;
@@ -33,7 +34,7 @@ describe('SearchService', () => {
       expect(result.length).toBeGreaterThan(0);
     })
     
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/search?type=offer&title=cargo');
+    const req = httpMock.expectOne(environment.apiURL+'/search?type=offer&title=cargo');
     expect(req.request.method).toBe("GET");
     req.flush(searchResult);
   })
@@ -44,7 +45,7 @@ describe('SearchService', () => {
       expect(result.length).toBe(0);
     })
     
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/search?type=offer&title=');
+    const req = httpMock.expectOne(environment.apiURL+'/search?type=offer&title=');
     expect(req.request.method).toBe("GET");
     req.flush(searchResult);
   })
@@ -55,7 +56,7 @@ describe('SearchService', () => {
       expect(result.length).toBe(0);
     })
     
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/search?type=offer&title=silva');
+    const req = httpMock.expectOne(environment.apiURL+'/search?type=offer&title=silva');
     expect(req.request.method).toBe("GET");
     req.flush(searchResult);
   })

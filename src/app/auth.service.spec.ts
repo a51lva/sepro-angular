@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 describe('AuthService', () => {
   let injector;
@@ -43,7 +44,7 @@ describe('AuthService', () => {
       expect(res).toEqual(authorizadummution);
     });
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/users/login');
+    const req = httpMock.expectOne(environment.apiURL+'/users/login');
     expect(req.request.method).toBe("POST");
     req.flush(authorizadummution);
   });
