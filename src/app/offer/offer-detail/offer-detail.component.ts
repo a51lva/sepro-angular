@@ -22,23 +22,28 @@ export class OfferDetailComponent implements OnInit {
       )
     )
     .subscribe(value => {
-      const offer$ = this.offerService.load(Number(value));
-      offer$.pipe(
-        filter((value) => {
-          return value != null
-      }))
-      .subscribe(
-        (value) => {
-          if(value.length > 0){
-            this.offer = value[0];
-          }else{
+      const cachedOffer = this.offerService.loadFromCache(Number(value));
+      if(cachedOffer){
+        this.offer = cachedOffer;
+      }else{
+        const offer$ = this.offerService.load(Number(value));
+        offer$.pipe(
+          filter((value) => {
+            return value != null
+        }))
+        .subscribe(
+          (value) => {
+            if(value.length > 0){
+              this.offer = value[0];
+            }else{
+              this.router.navigateByUrl('/404');
+            }
+          },
+          (error)=>{
             this.router.navigateByUrl('/404');
           }
-        },
-        (error)=>{
-          this.router.navigateByUrl('/404');
-        }
-      )
+        )
+      }
     });
   }
 }

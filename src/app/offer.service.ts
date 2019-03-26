@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, timer, of } from 'rxjs';
 import { Offer } from './offer';
-import { RequestOption } from './request-option';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -12,14 +11,12 @@ import { shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
 })
 export class OfferService {
   private apiURL:string = environment.apiURL;  
-  private requestOptions: RequestOption;
 
   private cache$: Observable<Array<Offer>>;
   private reload$ = new Subject<void>();
   private notification: boolean;
   
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.requestOptions = new RequestOption();
     const cachedOffers = localStorage.getItem('offers');
 
     if(cachedOffers != null){
@@ -29,9 +26,7 @@ export class OfferService {
   }
   
   create(item:Offer): Observable<Offer>{
-    const token = this.authService.getToken();
     item.provider = this.authService.getUserid();
-
     return this.http.post<Offer>(
       `${this.apiURL}/offer`, JSON.stringify(item)
     ).pipe(shareReplay());
@@ -41,6 +36,15 @@ export class OfferService {
     return this.http.get<Offer[]>(
       `${this.apiURL}/offer/${offerId}`
     ).pipe(shareReplay());
+  }
+
+  loadFromCache(offerId:number):Offer{
+    let offer:Offer = null;
+    const offers:Offer[] = JSON.parse(localStorage.getItem('offers'));
+    if(offers){
+      offer = offers.find(offer => offer.id == offerId)
+    }
+    return offer;
   }
   
   loadByProviderID(providerId:number):Observable<Offer[]>{
