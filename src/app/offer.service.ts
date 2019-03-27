@@ -60,7 +60,7 @@ export class OfferService {
         this.cache$ = timer$.pipe(
           switchMap(() => this.loadByProviderID(0)
             .pipe(              
-              map(result => {
+              tap(result => {
                 if(localOffers){
                   if(result.length >localOffers.length){
                     this.setNotification = true;

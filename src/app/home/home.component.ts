@@ -41,10 +41,6 @@ export class HomeComponent implements OnInit {
     return this.offerService.loadAllOffers.pipe(take(1));
   }
 
-  getSkipOne() {
-    return this.offerService.loadAllOffers.pipe(skip(1));
-  }
-
   forceReload() {
     this.offerService.setNotification = false;
     this.offerService.forceReload();

@@ -33,7 +33,7 @@
         <div class="col-md-6 col-xs-12">
           <h3 class="title-whatsnew">What's New</h3>
           <div class="row">            
-              <div class="col-sm-12 offer-card" *ngFor="let offer of offers$ | async | reverse | slice:0:4;" (click)="offerClick(offer.id)">
+              <div class="col-sm-12 offer-card" *ngFor="let offer of offers$| async  | reverse | slice:0:4" (click)="offerClick(offer.id)">
                   <div class="card mb-3">
                     <div class="row no-gutters">
                       <div class="col-md-4">
