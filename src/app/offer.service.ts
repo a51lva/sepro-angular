@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, timer, of, from } from 'rxjs';
+import { Observable, Subject, timer, of } from 'rxjs';
 import { Offer } from './offer';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
-import { shareReplay, switchMap, takeUntil, tap, filter, catchError } from 'rxjs/operators';
+import { shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -55,15 +55,12 @@ export class OfferService {
   
   get loadAllOffers(){
     if(!this.cache$){
-      const localOffers:Offer[] = JSON.parse(localStorage.getItem('offers'));
-      const localOffers$ = of(localOffers);      
-        this.cache$ = localOffers$.pipe(
+      const localOffers = JSON.parse(localStorage.getItem('offers'));
+      const timer$ = timer(0, environment.REFRESH_INTERVAL);      
+        this.cache$ = timer$.pipe(
           switchMap(() => this.loadByProviderID(0)
             .pipe(
-              catchError((error) => {this.setNotification = false;
-                return localOffers$
-              }),
-              tap((result) => {
+              tap(result => {
                 if(localOffers){
                   if(result.length >localOffers.length){
                     this.setNotification = true;
