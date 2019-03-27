@@ -12,8 +12,8 @@ import { CanActivateService } from './can-activate.service';
 import { AuthService } from './auth.service';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'sign-in', component:LoginComponent},
   { 
     path: 'sign-out', 
