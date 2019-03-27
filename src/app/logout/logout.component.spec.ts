@@ -19,7 +19,7 @@ describe('LogoutComponent', () => {
       declarations: [ LogoutComponent ],
       providers: [
        { provide: Router, useClass: RouterStub }
-    ]
+      ]
     })
     .compileComponents();
   }));

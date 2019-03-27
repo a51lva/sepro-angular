@@ -6,13 +6,14 @@ import { RequestOption } from './request-option';
 import { shareReplay } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiURL:string = environment.apiURL;;
-  private requestOptions: RequestOption;
+  helper = new JwtHelperService();
 
   private _idToken: string;
   private _accessToken: string;
@@ -27,7 +28,6 @@ export class AuthService {
   });
 
   constructor(private http: HttpClient, public router: Router) { 
-    this.requestOptions = new RequestOption();
     this._idToken = '';
     this._accessToken = '';
     this._expiresAt = 0;
@@ -36,16 +36,13 @@ export class AuthService {
   authenticate(username, password){
     return this.http.post(
       `${this.apiURL}/users/login`, 
-      JSON.stringify({username: username,password: password}), 
-      this.requestOptions.httpRequestOptions(false,'')
+      JSON.stringify({username: username,password: password})
     ).pipe(shareReplay());
   }
 
   userProfileRequest(userid){
-    let token = this.getToken();
     return this.http.get(
-      `${this.apiURL}/users/${userid}`, 
-      this.requestOptions.httpRequestOptions(true,token)
+      `${this.apiURL}/users/${userid}`
     ).pipe(shareReplay());
   }
 
@@ -56,7 +53,13 @@ export class AuthService {
 
   isAuthenticaded(){
     const token = this.getToken();
-    return !!token;
+    if(!token){
+      return false;
+    }
+    
+    const isTokenExpired = this.helper.isTokenExpired(token)
+    
+    return !isTokenExpired;
   }
 
   getToken(){

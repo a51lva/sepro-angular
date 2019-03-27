@@ -4,6 +4,7 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { Offer } from './offer';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 describe('OffersService', () => {
   let injector;
@@ -47,7 +48,7 @@ describe('OffersService', () => {
       expect(result).toBeTruthy();
     })
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/offer/1');
+    const req = httpMock.expectOne( environment.apiURL+'/offer/1');
     expect(req.request.method).toBe('GET');
   })
 
@@ -57,7 +58,7 @@ describe('OffersService', () => {
       expect(result.length).toBeGreaterThan(length);
     })
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/offers/0');
+    const req = httpMock.expectOne(environment.apiURL+'/offers/0');
     expect(req.request.method).toBe('GET');
   })
 
@@ -67,7 +68,7 @@ describe('OffersService', () => {
       expect(result.length).toBeGreaterThan(0);
     })
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/offers/5');
+    const req = httpMock.expectOne(environment.apiURL+'/offers/5');
     expect(req.request.method).toBe('GET');
 
   })
@@ -77,7 +78,7 @@ describe('OffersService', () => {
       expect(result.title).toBe(offer.title);
     })
 
-    const req = httpMock.expectOne('http://127.0.0.1:5000/api/offer');
+    const req = httpMock.expectOne(environment.apiURL+'/offer');
     expect(req.request.method).toBe('POST');
   })
   

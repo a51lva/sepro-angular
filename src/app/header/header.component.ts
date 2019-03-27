@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   private userProfile:any = null;
   searchField: FormControl;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
     
    }
 
