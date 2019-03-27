@@ -16,7 +16,7 @@
         <div class="col-12">
           <h3 class="title-feature">Featured Services </h3>
           <div class="row">
-            <div class="col-sm-3 offer-card" *ngFor="let featureCard of featuredCards; trackBy: trackByFn">
+            <div class="col-sm-3 offer-card" *ngFor="let featureCard of featuredCards;">
               <div class="card">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
                 <div class="card-body">
@@ -33,7 +33,7 @@
         <div class="col-md-6 col-xs-12">
           <h3 class="title-whatsnew">What's New</h3>
           <div class="row">            
-              <div class="col-sm-12 offer-card" *ngFor="let offer of offers$ | async | reverse | slice:0:4; trackBy: trackByFn" (click)="offerClick(offer.id)">
+              <div class="col-sm-12 offer-card" *ngFor="let offer of offers$ | async | reverse | slice:0:4;" (click)="offerClick(offer.id)">
                   <div class="card mb-3">
                     <div class="row no-gutters">
                       <div class="col-md-4">
@@ -54,7 +54,7 @@
         <div class="col-md-6 col-xs-12">
           <h3 class="title-whatshot">What's Hot</h3>
           <div class="row">            
-              <div class="col-sm-12 offer-card" *ngFor="let service of services; trackBy: trackByFn" (click)="offerClick(service.id)">
+              <div class="col-sm-12 offer-card" *ngFor="let service of services;" (click)="offerClick(service.id)">
                   <div class="card mb-3">
                     <div class="row no-gutters">
                       <div class="col-md-4">
@@ -78,7 +78,7 @@
         <div class="col-12">
           <h3 class="title-feature">Services In Lisbon</h3>
           <div class="row">
-            <div class="col-sm-3 offer-card" *ngFor="let featureCard of offers$ | async | filter:filterargs | slice:0:4; trackBy: trackByFn" (click)="offerClick(featureCard.id)">
+            <div class="col-sm-3 offer-card" *ngFor="let featureCard of offers$ | async | filter:filterargs | slice:0:4;" (click)="offerClick(featureCard.id)">
               <div class="card">
                 <svg class="bd-placeholder-img" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
                 <div class="card-body">
@@ -94,7 +94,7 @@
           <div class="col-12">
             <h3 class="title-feature">Who are Looking for Service?</h3>
             <div class="row">
-              <div class="col-sm-3" *ngFor="let featureCard of featuredCards; trackBy: trackByFn" (click)="offerClick(featureCard.id)">
+              <div class="col-sm-3" *ngFor="let featureCard of featuredCards;" (click)="offerClick(featureCard.id)">
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>

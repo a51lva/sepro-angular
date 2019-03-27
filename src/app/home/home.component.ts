@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   
   offers$: Observable<Offer[]>;
   showNotification$: Observable<boolean>;
-  update$ = new Subject<void>();
   forceReload$ = new Subject<void>();
 
   filterargs = {location: 'Lisbon'};
@@ -27,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const initialOffers$ = this.getDataOnce();
-    const updates$ = merge(this.update$, this.forceReload$).pipe(
+    const updates$ = this.forceReload$.pipe(
       mergeMap(() => this.getDataOnce())
     );
     
