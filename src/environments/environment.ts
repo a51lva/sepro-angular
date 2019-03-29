@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiURL:'/api',
-  REFRESH_INTERVAL : 10000,
+  REFRESH_INTERVAL : 35000,
   CACHE_SIZE : 1
 };
 
