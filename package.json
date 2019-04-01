@@ -9,7 +9,7 @@
     "rollup": "rollup -f iife dist/src/main.js -o dist/src/bundle.es2015.js",
     "es5": "tsc --target es2018 --allowJs dist/src/bundle.es2015.js --out dist/src/bundle.js",
     "minify": "terser dist/src/bundle.js --screw-ie8 --compress --mangle --output dist/src/bundle.min.js",
-    "build_prod": "npm run tsc && npm run rollup && npm run es5 && npm run minify",
+    "build_prod": "npm-run-all tsc rollup es5 minify",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -56,6 +56,7 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "npm": "^6.9.0",
+    "npm-run-all": "^4.1.5",
     "protractor": "~5.4.0",
     "rollup": "^1.7.4",
     "rollup-plugin-node-resolve": "^4.0.1",
