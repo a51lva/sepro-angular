@@ -43,7 +43,7 @@ export class AuthService {
   userProfileRequest(userid){
     return this.http.get(
       `${this.apiURL}/users/${userid}`
-    ).pipe(shareReplay());
+    );
   }
 
   logout(){

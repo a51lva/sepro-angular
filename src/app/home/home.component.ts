@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Offer } from '../offer';
 import { OfferService } from '../offer.service';
-import { Observable, Subject, merge, of, timer, fromEvent} from 'rxjs';
-import { take,  mapTo, switchMap, map, skip, mergeMap, tap } from 'rxjs/operators';
+import { Observable, Subject, merge, of, timer} from 'rxjs';
+import { take,  switchMap, skip, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   
   offers$: Observable<Offer[]>;
   showNotification$: Observable<boolean>;
-  update$ = new Subject<void>();
   forceReload$ = new Subject<void>();
 
   filterargs = {location: 'Lisbon'};
@@ -27,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const initialOffers$ = this.getDataOnce();
-    const updates$ = merge(this.update$, this.forceReload$).pipe(
+    const updates$ = this.forceReload$.pipe(
       mergeMap(() => this.getDataOnce())
     );
     
@@ -40,10 +39,6 @@ export class HomeComponent implements OnInit {
 
   getDataOnce() {
     return this.offerService.loadAllOffers.pipe(take(1));
-  }
-
-  getSkipOne() {
-    return this.offerService.loadAllOffers.pipe(skip(1));
   }
 
   forceReload() {

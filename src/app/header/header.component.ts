@@ -59,13 +59,11 @@ export class HeaderComponent implements OnInit {
     this.userProfile = this.authService.getUserProfile();
 
     if( this.userProfile == null && this.isAuthenticated){
-      this.authService.userProfileRequest(this.authService.getUserid()).pipe(
-        filter(profile => {return profile != null})
-      )
+      this.authService.userProfileRequest(this.authService.getUserid())
       .subscribe(
         (result) => {
-        this.userProfile = result;
-        this.authService.setUserProfile(this.userProfile);
+          this.userProfile = result;
+          this.authService.setUserProfile(this.userProfile);
         },
         (error) => {
           console.log(error);

@@ -4,7 +4,7 @@ import { Observable, Subject, timer, of } from 'rxjs';
 import { Offer } from './offer';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
-import { shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { shareReplay, switchMap, takeUntil, tap, catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +59,7 @@ export class OfferService {
       const timer$ = timer(0, environment.REFRESH_INTERVAL);      
         this.cache$ = timer$.pipe(
           switchMap(() => this.loadByProviderID(0)
-            .pipe(
+            .pipe(              
               tap(result => {
                 if(localOffers){
                   if(result.length >localOffers.length){
@@ -75,6 +75,9 @@ export class OfferService {
                   localStorage.setItem('offers', JSON.stringify(result))
                   return result
                 }
+              }),
+              catchError((error) => {
+                return of(localOffers)
               })
             )
           ),

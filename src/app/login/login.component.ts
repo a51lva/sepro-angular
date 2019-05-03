@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,17 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   username: FormControl;
   password: FormControl;
+  return: string;
   formValidation:boolean = false;
   formValidationMessage:string = "Please validate your form and try again!";
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => this.return = params['return'] || '/home');    
     if(this.authService.isAuthenticaded()){      
-      window.location.replace('/home');
+      window.location.replace(this.return);
     }
 
     this.createFormControls();
@@ -40,7 +44,7 @@ export class LoginComponent implements OnInit {
             (profile) => {
               this.authService.setUserProfile(profile);
               this.formValidation = false;
-              window.location.replace('/home');
+              window.location.replace(this.return)
             },
             (error) => {
               this.password.setValue('');
@@ -50,6 +54,8 @@ export class LoginComponent implements OnInit {
             },
             () => {console.log("Request Complete")}
           );
+
+          window.location.replace(this.return)
         },
         (error) => {
           this.password.setValue('');
